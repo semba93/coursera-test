@@ -2,17 +2,21 @@
 <html>
   <head>
     <meta charset="utf-8">
+    <script src="angular.min.js"></script>
     <script src="app.js"></script>
-    <style>body { font-size: 1.5em; }</style>
-    <title>Lecture 02 - Single Page Web Applications with AngularJS</title>
+    <title>Dependency Injection in Javascript (and AngularJS)</title>
   </head>
-  <body>
-    <h1>Low Cohesion and Tight Coupling</h1>
-    <div id="nameCalculator">
-      <div>
-        Your name: <input type="text" id="name">
-      </div>
-      <div id="output"></div>
+  <body ng-app = "DIApp">
+    <h1>Dependency Injection in Javascript (and AngularJS)</h1>
+    <div ng-controller = "DIController">
+        <input type="text" ng-model="name" ng-blur="upper();">
+        {{name}} dice:
+        {{sayMessage()}}
+        <div>
+          <button ng-click="feedYaakov()">Feed Yaakov</button>
+          <br>
+          <img ng-src="images/yaakov_{{stateOfBeing}}.png">
+        </div>
     </div>
   </body>
 </html>

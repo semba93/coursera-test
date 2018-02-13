@@ -1,27 +1,26 @@
-var student = {
-  name: "",
-  type: "student"
-};
+(function () {
+'use strict';
 
-document.addEventListener('DOMContentLoaded', contentLoaded);
+angular.module('DIApp', [])
+.controller('DIController',  DIController);
 
-function contentLoaded(event) {
-  document.getElementById('name').addEventListener("keyup", keyUp);
+DIController.$inject = ['$scope', '$filter'];
+function DIController ($scope, $filter) {
+  $scope.name = "Yaakov";
+    $scope.stateOfBeing = "hungry";
+
+  $scope.sayMessage = function () {
+    return "ho fame";
+  };
+
+  $scope.feedYaakov = function () {
+      $scope.stateOfBeing = "fed";
+  };
+
+  $scope.upper = function () {
+    var upCase = $filter('uppercase');
+    $scope.name = upCase($scope.name);
+  };
 }
 
-function keyUp(event) {
-  calculateNumericOutput();
-}
-
-function calculateNumericOutput() {
-  student.name = document.getElementById('name').value;
-
-  var totalNameValue = 0;
-  for (var i = 0; i < student.name.length; i++) {
-    totalNameValue += student.name.charCodeAt(i);
-  }
-
-  // Insert result into page
-  var output = "Total Numeric value of person's name is " + totalNameValue;
-  document.getElementById('output').innerText = output;
-}
+})();
