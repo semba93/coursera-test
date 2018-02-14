@@ -2,15 +2,25 @@
 'use strict';
 
 angular.module('DIApp', [])
-.controller('DIController',  DIController);
+.controller('DIController',  DIController)
+.filter('loves', LovesFilter);
 
-DIController.$inject = ['$scope', '$filter'];
-function DIController ($scope, $filter) {
+DIController.$inject = ['$scope', '$filter', 'lovesFilter'];
+function DIController ($scope, $filter, lovesFilter) {
   $scope.name = "Yaakov";
     $scope.stateOfBeing = "hungry";
+    $scope.cookieCost = .45;
 
   $scope.sayMessage = function () {
-    return "ho fame";
+    var msg = "likes";
+    var output = $filter('uppercase')(msg);
+    return output;
+  };
+
+  $scope.sayLovesMessage = function () {
+    var msg = "likes";
+    msg = lovesFilter(msg);
+    return msg;
   };
 
   $scope.feedYaakov = function () {
@@ -20,6 +30,14 @@ function DIController ($scope, $filter) {
   $scope.upper = function () {
     var upCase = $filter('uppercase');
     $scope.name = upCase($scope.name);
+  };
+}
+
+function LovesFilter() {
+  return function (input) {
+    input = input || "";
+    input = input.replace("likes", "loves");
+    return input;
   };
 }
 
